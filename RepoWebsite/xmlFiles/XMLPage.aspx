@@ -9,6 +9,6 @@
             <asp:BoundField DataField="Average" HeaderText="Average" SortExpression="Average" />
         </Columns>
     </asp:GridView>
-    <asp:XmlDataSource ID="XmlDataSource1" runat="server" DataFile="~/xml Files/XMLDemo.xml" TransformFile="~/xml Files/XSLTDemo.xslt"></asp:XmlDataSource>
+    <asp:XmlDataSource ID="XmlDataSource1" runat="server" DataFile="~/xmlFiles/XMLDemo.xml" TransformFile="~/xmlFiles/XSLTDemo.xslt"></asp:XmlDataSource>
 </asp:Content>
 
