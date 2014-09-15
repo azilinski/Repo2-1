@@ -19,9 +19,9 @@ namespace eResturauntSystem.BLL
         public List<SpecialEvents> SpecialEvent_List()
         {
             //interfacing with our Context Class 
-            using (eResturauntContext contex = new eResturauntContext())
+            using (eResturauntContext context = new eResturauntContext())
             {
-                return contex.SpecialEvents.ToList();
+                return context.SpecialEvents.ToList();
             }
         }
     }
