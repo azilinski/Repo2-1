@@ -10,10 +10,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace eResturauntSystem.Entites
 {
-    public class SpecialEvents
+    public class SpecialEvent
     {
         [Key]
-        public char EventCode { get; set; }
+        public string EventCode { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
     }

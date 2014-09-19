@@ -16,12 +16,22 @@ namespace eResturauntSystem.BLL
     public class eResturauntController
     {
         [DataObjectMethod(DataObjectMethodType.Select,false)]
-        public List<SpecialEvents> SpecialEvent_List()
+        public List<SpecialEvent> SpecialEvent_List()
         {
             //interfacing with our Context Class 
             using (eResturauntContext context = new eResturauntContext())
             {
                 return context.SpecialEvents.ToList();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<Reservation> Reservation_List()
+        {
+            //interfacing with our Context Class 
+            using (eResturauntContext context = new eResturauntContext())
+            {
+                return context.Reservations.ToList();
             }
         }
     }

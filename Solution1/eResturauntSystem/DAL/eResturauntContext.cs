@@ -19,8 +19,8 @@ namespace eResturauntSystem.DAL
         public eResturauntContext() : base("name=EatIn") { }
 
         //One DbSet is to be created for each entity to be referenced by your 
-        public DbSet<SpecialEvents> SpecialEvents { get; set; }
-        //public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<SpecialEvent> SpecialEvents { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
         //public DbSet<Table> Tables { get; set; }
     }
 }
