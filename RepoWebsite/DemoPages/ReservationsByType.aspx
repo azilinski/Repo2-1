@@ -13,10 +13,20 @@
             <HeaderStyle HorizontalAlign="Center" />
             <ItemStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="NumberInParty" HeaderText="Number In Party" SortExpression="NumberInParty" />
-            <asp:BoundField DataField="ContactPhone" HeaderText="Contact Phone" SortExpression="ContactPhone" />
+            <asp:TemplateField AccessibleHeaderText="Number in Party">
+                <ItemTemplate>
+                    <asp:TextBox id="Test" runat="server" Text='<%# Eval("NumberInParty") %>'></asp:TextBox>
+                </ItemTemplate>                
+            </asp:TemplateField>
+
+            <asp:TemplateField HeaderText="Contact #">
+                <ItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("ContactPhone") %>'></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="ReservationStatus" HeaderText="ReservationStatus" SortExpression="ReservationStatus" />
             <asp:BoundField DataField="EventCode" HeaderText="EventCode" SortExpression="EventCode" />
+
         </Columns>
         <PagerSettings FirstPageText="First" LastPageText="Last" Mode="NumericFirstLast" PageButtonCount="20" />
     </asp:GridView>
