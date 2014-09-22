@@ -31,5 +31,16 @@
         <PagerSettings FirstPageText="First" LastPageText="Last" Mode="NumericFirstLast" PageButtonCount="20" />
     </asp:GridView>
     <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="Reservation_List" TypeName="eResturauntSystem.BLL.eResturauntController"></asp:ObjectDataSource>
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataSourceID="ObjectDataSource1">
+        <Columns>
+            <asp:BoundField AccessibleHeaderText="Code" DataField="EventCode" HeaderText="Code" />
+            <asp:BoundField DataField="Description" HeaderText="Description" ReadOnly="True" />
+            <asp:TemplateField HeaderText="Active">
+                <ItemTemplate>
+                    <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Eval("Active") %>' />
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+    </asp:GridView>
 </asp:Content>
 
