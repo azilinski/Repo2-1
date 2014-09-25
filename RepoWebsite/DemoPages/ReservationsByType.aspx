@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ReservationsByType.aspx.cs" Inherits="DemoPages_ReservationsByType" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
-    <asp:DropDownList ID="DropDownList1" runat="server" Value="" DataSourceID="ObjectDataSource3" DataTextField="Description" DataValueField="EventCode" AppendDataBoundItems="True">
+    <asp:DropDownList ID="DropDownList1" runat="server" Value="" DataSourceID="ObjectDataSource1" 
+        DataTextField="Description" DataValueField="EventCode" AppendDataBoundItems="True">
         <asp:ListItem>Select Event</asp:ListItem>
     </asp:DropDownList>
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="SpecialEvent_List" TypeName="eResturauntSystem.BLL.eResturauntController"></asp:ObjectDataSource>
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="ObjectDataSource2" PageSize="25">
+    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="ObjectDataSource3" PageSize="25">
         <Columns>
             <asp:BoundField DataField="ReservationId" HeaderText="ID" ReadOnly="True" SortExpression="ReservationId">
             <HeaderStyle HorizontalAlign="Center" />
@@ -47,7 +48,13 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="SpecialEvent_List" TypeName="eResturauntSystem.BLL.eResturauntController" OnSelecting="ObjectDataSource3_Selecting"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" 
+        OldValuesParameterFormatString="original_{0}" SelectMethod="SpecialEvent_List" 
+        TypeName="eResturauntSystem.BLL.eResturauntController" OnSelecting="ObjectDataSource3_Selecting">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="DropDownList1" Name="eventcode" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
     <a href="javascript:__doPostBack('LinkButton1','')">Refresh List</a>
 </asp:Content>
 
