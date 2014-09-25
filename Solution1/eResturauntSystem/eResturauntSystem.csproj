@@ -49,8 +49,10 @@
     <Compile Include="BLL\eResturauntController.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DAL\eResturauntContext.cs" />
+    <Compile Include="Entites\Bill.cs" />
     <Compile Include="Entites\Reservation.cs" />
     <Compile Include="Entites\SpecialEvent.cs" />
+    <Compile Include="Entites\Waiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
