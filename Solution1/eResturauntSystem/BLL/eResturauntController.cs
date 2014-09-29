@@ -15,6 +15,7 @@ namespace eResturauntSystem.BLL
     [DataObject]
     public class eResturauntController
     {
+        #region Special Events
         [DataObjectMethod(DataObjectMethodType.Select,false)]
         public List<SpecialEvent> SpecialEvent_List()
         {
@@ -24,7 +25,51 @@ namespace eResturauntSystem.BLL
                 return context.SpecialEvents.ToList();
             }
         }
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        public SpecialEvent SpecialEventByEventCode(string eventcode)
+        {
+            using(eResturauntContext context = new eResturauntContext())
+            {
+                return context.SpecialEvents.Find(eventcode);
+            }
+        }
+        [DataObjectMethod(DataObjectMethodType.Insert,false)]
+        public void SpecialEvents_Add(SpecialEvent item)
+        {
+            using(eResturauntContext context = new eResturauntContext())
+            {
+            SpecialEvent added = null;
+            added = context.SpecialEvents.Add(item);
+            // commits the add to the database
+            // evaluates the anotations(validations) on your entity
+            //[Required],[StringLength],[Range]...
+            context.SaveChanges(); 
+            }                
+        }
 
+        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        public void SpecialEvents_Update(SpecialEvent item)
+        { 
+            using(eResturauntContext context = new eResturauntContext())
+            {
+                context.Entry<SpecialEvent>(context.SpecialEvents.Attach(item)).State
+                    = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Delete,false)]
+        public void SpecialEvents_Delete(SpecialEvent item)
+        {
+            using(eResturauntContext context = new eResturauntContext())
+            {
+                SpecialEvent existing = context.SpecialEvents.Find(item.EventCode);
+                context.SpecialEvents.Remove(existing);
+                context.SaveChanges();
+            }
+        }
+        #endregion
+        #region Reservations
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Reservation> Reservation_List()
         {
@@ -34,7 +79,7 @@ namespace eResturauntSystem.BLL
                 return context.Reservations.ToList();
             }
         }
-
+        
         [DataObjectMethod(DataObjectMethodType.Select,false)]
         public List<Reservation> ReservationbyEvent(string eventcode)
         {
@@ -43,5 +88,53 @@ namespace eResturauntSystem.BLL
                 return context.Reservations.Where(anItem => anItem.EventCode == eventcode).ToList();
             }
         }
+        #endregion
+        #region Waiter
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        public List<Waiter> Waiter_List()
+        {
+            using(eResturauntContext context= new eResturauntContext())
+            {
+               return context.Waiters.ToList();
+            }
+        }
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
+        public Waiter WaiterByWaiterID(int waiterID)
+        {
+            using(eResturauntContext context = new eResturauntContext())
+            {
+                return context.Waiters.Find(waiterID);
+            }
+        }
+        [DataObjectMethod(DataObjectMethodType.Insert,false)]
+        public void Waiter_Add(Waiter item)
+        {
+            using(eResturauntContext context = new eResturauntContext())
+            {
+                Waiter added = null;
+                added = context.Waiters.Add(item);
+                context.SaveChanges();
+            }
+        }
+        [DataObjectMethod(DataObjectMethodType.Update,false)]
+        public void Waiter_Update(Waiter item)
+        {
+            using (eResturauntContext context = new eResturauntContext()){
+                context.Entry<Waiter>(context.Waiters.Attach(item)).State
+                    = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+        [DataObjectMethod(DataObjectMethodType.Delete,false)]
+        public void Waiter_Delete(Waiter item)
+        {
+            using (eResturauntContext context = new eResturauntContext())
+            {
+                Waiter existing = context.Waiters.Find(item.WaiterID);
+                context.Waiters.Remove(existing);
+                context.SaveChanges();
+            }
+        }
+        #endregion
     }
 }

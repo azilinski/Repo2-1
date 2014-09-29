@@ -19,5 +19,7 @@ namespace eResturauntSystem.Entites
         public string ContactPhone { get; set; }
         public string ReservationStatus { get; set; }
         public string EventCode { get; set; }
+
+        public virtual SpecialEvent SpecialEvent { get; set; }
     }
 }

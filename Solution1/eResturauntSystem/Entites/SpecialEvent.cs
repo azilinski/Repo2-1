@@ -16,5 +16,7 @@ namespace eResturauntSystem.Entites
         public string EventCode { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
+
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

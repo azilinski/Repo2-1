@@ -6,6 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#region Additional Namespaces
+using System.ComponentModel.DataAnnotations;
+#endregion
+
 namespace eResturauntSystem.Entites
 {
     public class Waiter
@@ -37,6 +41,7 @@ namespace eResturauntSystem.Entites
         //DayOfWeek
         //Compound keys [Column(Order=0),Key]
         //              [Column(Order=1),Key]
+        //tiny = byte
 
         //Navigation
         public virtual ICollection<Bill> Bills { get; set; }
