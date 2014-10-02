@@ -17,5 +17,6 @@
       <siteMapNode title="Demos" description="Pages with demos">
         <siteMapNode url="~/DemoPages/ReservationsByType.aspx" title="Reservations by Type" description=""/>
       </siteMapNode>
+      <siteMapNode url="~/DemoPages/ListVeiwSpecialEventsCRUD.aspx" title="EventCode CRUD" description="  d"></siteMapNode>
     </siteMapNode>
 </siteMap>

@@ -22,7 +22,12 @@ namespace eResturauntSystem.BLL
             //interfacing with our Context Class 
             using (eResturauntContext context = new eResturauntContext())
             {
-                return context.SpecialEvents.ToList();
+                //using Context DBSet to get Entity Data
+                //return context.SpecialEvents.ToList();
+
+                //get a list of instancesfor entity using LINQ
+                var results= from item in context.SpecialEvents select item;
+                return results.ToList();
             }
         }
         [DataObjectMethod(DataObjectMethodType.Select,false)]
