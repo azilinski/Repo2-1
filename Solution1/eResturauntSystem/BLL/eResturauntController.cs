@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using eResturauntSystem.Entites;
 using eResturauntSystem.DAL;
 using System.ComponentModel;
+using eResturauntSystem.POCOs;
 #endregion
 
 namespace eResturauntSystem.BLL
@@ -138,6 +139,32 @@ namespace eResturauntSystem.BLL
                 Waiter existing = context.Waiters.Find(item.WaiterID);
                 context.Waiters.Remove(existing);
                 context.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region Linq Queries
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<CategoryMenuItems> GetCategoryMenuItems()
+        { 
+            using(eResturauntContext context = new eResturauntContext())
+            {
+                var results = from cat in MenuCategories
+                              orderby cat.Description
+                              select new CategoryMenuItems()
+                              {
+                                  Description = cat.Description,
+                                  MenuItems = from item in cat.Items
+                                              where item.Active
+                                              select new MenuItem()
+                                              {
+                                                  Description = item.Description,
+                                                  Price = item.CurrentPrice,
+                                                  Calories = item.Calories,
+                                                  Comment = item.Comment
+                                              }
+                              };
+                results.Dump();
             }
         }
         #endregion

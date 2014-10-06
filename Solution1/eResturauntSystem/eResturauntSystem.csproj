@@ -50,9 +50,13 @@
     <Compile Include="Class1.cs" />
     <Compile Include="DAL\eResturauntContext.cs" />
     <Compile Include="Entites\Bill.cs" />
+    <Compile Include="Entites\Items.cs" />
+    <Compile Include="Entites\MenuCategories.cs" />
     <Compile Include="Entites\Reservation.cs" />
     <Compile Include="Entites\SpecialEvent.cs" />
     <Compile Include="Entites\Waiter.cs" />
+    <Compile Include="POCOs\CategoryMenuItems.cs" />
+    <Compile Include="POCOs\MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
