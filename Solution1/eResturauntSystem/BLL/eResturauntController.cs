@@ -164,7 +164,7 @@ namespace eResturauntSystem.BLL
                                                   Comment = item.Comment
                                               }
                               };
-                results.Dump();
+                return results.ToList();
             }
         }
         #endregion
