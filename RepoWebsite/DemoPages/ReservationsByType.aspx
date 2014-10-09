@@ -49,8 +49,11 @@
         </Columns>
     </asp:GridView>
     <asp:ObjectDataSource ID="ObjectDataSource3" runat="server" 
-        OldValuesParameterFormatString="original_{0}" SelectMethod="Reservation_List" 
+        OldValuesParameterFormatString="original_{0}" SelectMethod="ReservationbyEvent" 
         TypeName="eResturauntSystem.BLL.eResturauntController" OnSelecting="ObjectDataSource3_Selecting">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="DropDownList1" Name="eventcode" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
     </asp:ObjectDataSource>
     <a href="javascript:__doPostBack('LinkButton1','')">Refresh List</a>
 </asp:Content>
