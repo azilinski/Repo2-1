@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 #region Additional Namespaces
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 #endregion
 
 namespace eResturauntSystem.Entites
@@ -42,6 +43,9 @@ namespace eResturauntSystem.Entites
         //              [Column(Order=1),Key]
         //tiny = byte
 
+        //Creates the equilavent of a read only property
+        [NotMapped]
+        public String FullName { get { return string.Format("{0},{1}", LastName, FirstName); } }
         //Navigation
         public virtual ICollection<Bill> Bills { get; set; }
 

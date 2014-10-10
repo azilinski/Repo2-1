@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 #region Additional Namespaces
 using System.ComponentModel.DataAnnotations;
+using eRestaurantSystem.Entities;
 #endregion
 
 namespace eResturauntSystem.Entites
@@ -21,5 +22,6 @@ namespace eResturauntSystem.Entites
         public string EventCode { get; set; }
 
         public virtual SpecialEvent SpecialEvent { get; set; }
+        public virtual ICollection<Table> Tables { get; set; }
     }
 }

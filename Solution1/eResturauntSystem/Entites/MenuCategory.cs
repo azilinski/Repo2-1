@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace eResturauntSystem.Entites
 {
-    public class MenuCategories
+    public class MenuCategory
     {
         [Key]
-        public Int32 MenuCatrgoryID { get; set; }
-        public string Desciption { get; set; }
+        public Int32 MenuCategoryID { get; set; }
+        public string Description { get; set; }
 
         //nav
         public virtual ICollection<Items> Items { get; set; }

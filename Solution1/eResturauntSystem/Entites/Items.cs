@@ -15,11 +15,11 @@ namespace eResturauntSystem.Entites
         public decimal CurrentPrice { get; set; }
         public decimal CurrentCost { get; set; }
         public bool Active { get; set; }
-        public Int32? Callories { get; set; }
-        public string Comments { get; set; }
+        public Int32? Calories { get; set; }
+        public string Comment { get; set; }
         public Int32 MenuCategoryID { get; set; }
 
         //nav
-        public virtual MenuCategories MenuCategories { get; set; }
+        public virtual MenuCategory MenuCategories { get; set; }
     }
 }

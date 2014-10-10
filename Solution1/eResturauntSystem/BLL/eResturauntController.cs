@@ -144,29 +144,29 @@ namespace eResturauntSystem.BLL
         #endregion
 
         #region Linq Queries
-        //[DataObjectMethod(DataObjectMethodType.Select, false)]
-        //public List<CategoryMenuItems> GetCategoryMenuItems()
-        //{ 
-        //    using(eResturauntContext context = new eResturauntContext())
-        //    {
-        //        var results = from cat in MenuCategories
-        //                      orderby cat.Description
-        //                      select new CategoryMenuItems()
-        //                      {
-        //                          Description = cat.Description,
-        //                          MenuItems = from item in cat.Items
-        //                                      where item.Active
-        //                                      select new MenuItem()
-        //                                      {
-        //                                          Description = item.Description,
-        //                                          Price = item.CurrentPrice,
-        //                                          Calories = item.Calories,
-        //                                          Comment = item.Comment
-        //                                      }
-        //                      };
-        //        return results.ToList();
-        //    }
-        //}
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<CategoryMenuItems> GetCategoryMenuItems()
+        {
+            using (eResturauntContext context = new eResturauntContext())
+            {
+                var results = from cat in context.MenuCategories
+                              orderby cat.Description
+                              select new CategoryMenuItems()
+                              {
+                                  Description = cat.Description,
+                                  MenuItems = from item in cat.Items
+                                              where item.Active
+                                              select new MenuItem()
+                                              {
+                                                  Description = item.Description,
+                                                  Price = item.CurrentPrice,
+                                                  Calories = item.Calories,
+                                                  Comment = item.Comment
+                                              }
+                              };
+                return results.ToList();
+            }
+        }
         #endregion
     }
 }
