@@ -19,11 +19,23 @@ public partial class DemoPages_WaiterCRUD : System.Web.UI.Page
 
     protected void FetchWaiter_Click(object sender, EventArgs e)
     {
-
+        if (WaiterList.SelectedIndex == 0)
+            MessageUserControl.ShowInfo("Please select a waiter before clicking Show Waiter.");
+        else
+            MessageUserControl.TryRun((ProcessRequest)GetWaiterInfo);
     }
     public void GetWaiterInfo()
     {
-
+        eRestaurantController controller = new eRestaurantController();
+        var waiter = controller.GetWaiter(int.Parse(WaiterList.SelectedValue));
+        WaiterID.Text = waiter.WaiterID.ToString();
+        FirstName.Text = waiter.FirstName;
+        LastName.Text = waiter.LastName;
+        Phone.Text = waiter.Phone;
+        Address.Text = waiter.Address;
+        HiredDate.Text = waiter.HireDate.ToShortDateString();
+        if (waiter.ReleaseDate.HasValue)
+            ReleaseDate.Text = waiter.ReleaseDate.Value.ToShortDateString();
     }
     protected void HiredDateCalendarButton_Click(object sender, ImageClickEventArgs e)
     {
@@ -54,10 +66,35 @@ public partial class DemoPages_WaiterCRUD : System.Web.UI.Page
     }
     protected void InsertWaiter_Click(object sender, EventArgs e)
     {
-
+        MessageUserControl.TryRun((ProcessRequest)InsertWaiterInfo);
     }
     public void InsertWaiterInfo()
     {
+        //the code that exsits withen this method is a standered CRUD insert form AppDev1
+        eRestaurantController controller = new eRestaurantController();
+
+        //load an instance of contorller
+        Waiter item = new Waiter();
+        item.WaiterID = 0;//identity feild for SQL therefore set to 0
+        item.FirstName = FirstName.Text;
+        item.LastName = LastName.Text;
+        item.Phone = Phone.Text;
+        item.Address = Address.Text;
+        item.HireDate = DateTime.Parse(HiredDate.Text);
+        if (string.IsNullOrEmpty(ReleaseDate.Text))
+        {
+            item.ReleaseDate = null;
+        }
+        else
+        {
+            item.ReleaseDate = DateTime.Parse(ReleaseDate.Text);
+        }
+
+        //call the controller's add method for the waiter
+        controller.Waiter_Add(item);
+
+        //rebind the drop down list (WaiterList) so the new waiter will appear in the list
+        WaiterList.DataBind();
 
     }
     protected void UpdateWaiter_Click(object sender, EventArgs e)
