@@ -20,6 +20,7 @@
         <siteMapNode url="~/DemoPages/RepeaterMenuCategories.aspx" title="Repeater MenuCategories" description="Repeater MenuCategories" />
         <siteMapNode url="~/DemoPages/WaiterCRUD.aspx" title="Waiter Maintenance" description="Waiter Maintenance" />
         <siteMapNode url="~/DemoPages/CategoryMenuItemsReport.aspx" title="Category Menu Items Report" description="CategoryMenuItemsReport" />
+        <siteMapNode url="~/DemoPages/TotalItemSalesByMenuCategoryReport.aspx" title="Total Item Sales By Menu Category Report" description="TotalItemSalesByMenuCategoryReport" />
       </siteMapNode>
       </siteMapNode>
 </siteMap>
