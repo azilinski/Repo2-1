@@ -14,6 +14,9 @@ namespace eRestaurantSystem.Entities
         [Required(ErrorMessage = "Bill Date is required.")]
         public DateTime BillDate { get; set; }
         public DateTime OrderPlaced { get; set; }
+        public DateTime OrderReady { get; set; }
+        public DateTime OrderServed { get; set; }
+        public DateTime OrderPaid { get; set; }
         [Required(ErrorMessage = "Number in party is required.")]
         public int NumberInParty { get; set; }
         public bool PaidStatus { get; set; }
