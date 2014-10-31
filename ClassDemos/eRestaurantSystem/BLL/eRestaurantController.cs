@@ -236,7 +236,42 @@ namespace eRestaurantSystem.BLL
                 return results.ToList(); // this was .Dump() in Linqpad
             }
         }
-    
+
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<DTOs.ReservationCollection> ReservationsByTime(DateTime date)
+        {
+            //interfacing with our Context class
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+
+                var results = from data in context.Reservations
+                              where data.ReservationDate.Year == date.Year
+                                  && data.ReservationDate.Month == date.Month
+                                  && data.ReservationDate.Day == date.Day
+                                  && data.ReservationStatus == 'B'
+                              select new POCOs.ReservationSummary
+                              {
+                                  Name = data.CustomerName,
+                                  Date = data.ReservationDate,
+                                  Status = data.ReservationStatus,
+                                  Event = data.SpecialEvents.Description,
+                                  NumberInParty = data.NumberInParty,
+                                  Contact = data.ContactPhone
+                              };
+                //group example
+                var finalResults = from item in results
+                                   orderby item.NumberinParty
+                                   group item by item.Date.TimeOfDay into itemGroup
+                                   select new DTOs.ReservationCollection
+                                   {
+                                       SeatingTime = itemGroup.Key.ToString(),
+                                       Reservations = itemGroup.ToList()
+                                   };
+                return finalResults.ToList();
+
+            }
+        }
+
     #endregion
 
         #region UX Clockpicker
