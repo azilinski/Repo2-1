@@ -248,23 +248,29 @@ namespace eRestaurantSystem.BLL
                               where data.ReservationDate.Year == date.Year
                                   && data.ReservationDate.Month == date.Month
                                   && data.ReservationDate.Day == date.Day
-                                  && data.ReservationStatus == 'B'
+                                  && data.ReservationStatus == "B"
                               select new POCOs.ReservationSummary
                               {
                                   Name = data.CustomerName,
                                   Date = data.ReservationDate,
                                   Status = data.ReservationStatus,
-                                  Event = data.SpecialEvents.Description,
-                                  NumberInParty = data.NumberInParty,
+                                  Event = data.SpecialEvent.Description,
+                                  NumberinParty = data.NumberinParty,
                                   Contact = data.ContactPhone
                               };
                 //group example
+                // when you are developiing your queries in LinqPad
+                //  you are working with Linq to SQL
+                //When you are using the queries in the controler
+                //  you are working with Linq to Entities
+                //TimeOfDay if OK for Linq to SQL
+                //we will use the DateTime Hour propertiey 
                 var finalResults = from item in results
                                    orderby item.NumberinParty
                                    group item by item.Date.TimeOfDay into itemGroup
                                    select new DTOs.ReservationCollection
                                    {
-                                       SeatingTime = itemGroup.Key.ToString(),
+                                       //Hour = itemGroup.Key,
                                        Reservations = itemGroup.ToList()
                                    };
                 return finalResults.ToList();
