@@ -23,7 +23,7 @@
         <details open>
             <summary>Tables</summary>
             <asp:GridView ID="SeatingGridView" runat="server" AutoGenerateColumns="False"
-                DataSourceID="SeatingObjectDataSource" ItemType="eRestaurant.Entities.DTOs.SeatingSummary">
+                DataSourceID="SeatingObjectDataSource" ItemType="eRestaurant.POCOs.SeatingSummary">
                 <Columns>
                     <asp:BoundField DataField="Table" HeaderText="Table" SortExpression="Table"></asp:BoundField>
                     <asp:BoundField DataField="Seating" HeaderText="Seating" SortExpression="Seating"></asp:BoundField>
