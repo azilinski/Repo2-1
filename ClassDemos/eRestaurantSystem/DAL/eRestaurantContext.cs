@@ -36,8 +36,8 @@ namespace eRestaurantSystem.DAL
                 .Map(mapping =>
                 {
                     mapping.ToTable("ReservationTables");
-                    mapping.MapLeftKey("TableID");
-                    mapping.MapRightKey("ReservationID");
+                    mapping.MapRightKey("TableID");
+                    mapping.MapLeftKey("ReservationID");
                 });
             base.OnModelCreating(modelBuilder);
         }
