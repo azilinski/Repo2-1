@@ -159,6 +159,22 @@ namespace eRestaurantSystem.BLL
             }
         }
         [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<WaiterOnDuty> ListWaiters()
+        {
+            using (eRestaurantContext context = new eRestaurantContext())
+            {
+                var results = from item in context.Waiters
+                              orderby item.LastName, item.FirstName
+                              select new POCOs.WaiterOnDuty
+                              {
+                                  WaiterId = item.WaiterID,
+                                  FullName = item.FirstName + " " + item.LastName
+                              };
+                return results.ToList();
+
+            }
+        }
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public Waiter GetWaiter(int waiterid)
         {
             using (eRestaurantContext context = new eRestaurantContext())
@@ -202,21 +218,6 @@ namespace eRestaurantSystem.BLL
             }
         }
 
-        [DataObjectMethod(DataObjectMethodType.Select, false)]
-        public List<WaiterOnDuty> ListWaiters()
-        {
-            using (var context = new eRestaurantContext())
-            {
-                var result = from item in context.Waiters
-                             orderby item.LastName, item.FirstName
-                             select new WaiterOnDuty()
-                             {
-                                 WaiterId = item.WaiterID,
-                                 FullName = item.FirstName + " " + item.LastName
-                             };
-                return result.ToList();
-            }
-        }
     
     #endregion
     
@@ -355,7 +356,53 @@ namespace eRestaurantSystem.BLL
 
         }
 
-
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<SeatingSummary> AvailableSeatingByDateTime(DateTime date, TimeSpan time)
+        {
+            var result = from seats in SeatingByDateTime(date, time)
+                         where !seats.Taken
+                         select seats;
+            return result.ToList();
+        }
+        /// <summary>
+        /// Seats a customer that is a walk-in
+        /// </summary>
+        /// <param name="when">A mock value of the date/time (Temporary - see remarks)</param>
+        /// <param name="tableNumber">Table number to be seated</param>
+        /// <param name="customerCount">Number of customers being seated</param>
+        /// <param name="waiterId">Id of waiter that is serving</param>
+        public void SeatCustomer(DateTime when, byte tableNumber, int customerCount, int waiterId)
+        {
+            var availableSeats = AvailableSeatingByDateTime(when.Date, when.TimeOfDay);
+            using (var context = new eRestaurantContext())
+            {
+                List<string> errors = new List<string>();
+                // Rule checking:
+                // - Table must be available - typically a direct check on the table, but proxied based on the mocked time here
+                // - Table must be big enough for the # of customers
+                if (!availableSeats.Exists(x => x.Table == tableNumber))
+                {
+                    errors.Add("Table is currently not available");
+                }
+                else if (!availableSeats.Exists(x => x.Table == tableNumber && x.Seating >= customerCount))
+                { 
+                    errors.Add("Insufficient seating capacity for number of customers.");
+                }
+                if (errors.Count > 0)
+                { 
+                    throw new BusinessRuleException("Unable to seat customer", errors);
+                }
+                Bill seatedCustomer = new Bill()
+                {
+                    BillDate = when,
+                    NumberInParty = customerCount,
+                    WaiterID = waiterId,
+                    TableID = context.Tables.Single(x => x.TableNumber == tableNumber).TableID
+                };
+                context.Bills.Add(seatedCustomer);
+                context.SaveChanges();
+            }
+        }
     #endregion
 
     #region Linq Queries
@@ -398,8 +445,5 @@ namespace eRestaurantSystem.BLL
         }
     }
     #endregion
-
-
-        
     }
 }

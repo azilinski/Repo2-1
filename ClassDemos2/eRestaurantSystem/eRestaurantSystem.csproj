@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\eRestaurantController.cs" />
+    <Compile Include="BusinessRuleException .cs" />
     <Compile Include="DAL\eRestaurantContext.cs" />
     <Compile Include="DTOs\ReservationCollection.cs" />
     <Compile Include="POCOs\ReservationSummary.cs" />
@@ -63,7 +64,7 @@
     <Compile Include="POCOs\CategoryMenuItems.cs" />
     <Compile Include="POCOs\SeatingSummary.cs" />
     <Compile Include="POCOs\TotalItemSalesByMenuCategory.cs" />
-    <Compile Include="POCOs\WaiterOnDuty.cs" />
+    <Compile Include="POCOs\WaiterOnDutycs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
