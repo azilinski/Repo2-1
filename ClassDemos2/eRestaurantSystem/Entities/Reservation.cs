@@ -21,6 +21,12 @@ namespace eRestaurantSystem.Entities
         public string ReservationStatus { get; set; }
         public string Eventcode { get; set; }
 
+        public const string Booked = "B";
+        public const string Arrived = "A";
+        public const string Complete = "C";
+        public const string NoShow = "N";
+        public const string Cancelled = "X";
+
         //navigation
         //pointing to a parent one
         public virtual SpecialEvent SpecialEvent { get; set; }

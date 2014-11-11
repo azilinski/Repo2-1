@@ -15,5 +15,6 @@ namespace eRestaurantSystem.POCOs
         public string Event { get; set; }
         public int NumberinParty { get; set; }
         public string Contact { get; set; }
+        public int ID { get; set; }
     }
 }
