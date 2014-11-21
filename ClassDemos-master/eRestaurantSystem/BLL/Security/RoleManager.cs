@@ -1,4 +1,5 @@
 ﻿using eRestaurantSystem.DAL.Security;
+using eRestaurantSystem.Entities.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -15,6 +16,18 @@ namespace eRestaurantSystem.BLL.Security
             : base(new RoleStore<IdentityRole>(new ApplicationDbContext()))
         {
 
+        }
+
+        public void AddDefaultRoles()
+        {
+            foreach (string roleName in SecurityRoles.DefaultSecurityRoles)
+            {
+                // Check if it exists
+                if (!Roles.Any(r => r.Name == roleName))
+                {
+                    this.Create(new IdentityRole(roleName));
+                }
+            }
         }
     }
 }
