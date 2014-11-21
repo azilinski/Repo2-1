@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 #region
 using eRestaurantSystem.Entities.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 #endregion
 
 namespace eRestaurantSystem.DAL.Security
