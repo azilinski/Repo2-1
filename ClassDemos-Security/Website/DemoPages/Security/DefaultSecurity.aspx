@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
         <div class="row jumbotron">
-        <h1>Site Administration</h1>
+        <h1>Site Administration</h1><asp:Label ID="bob" runat="server" />
     </div>
     <div class="row">
         <div class="col-md-9">

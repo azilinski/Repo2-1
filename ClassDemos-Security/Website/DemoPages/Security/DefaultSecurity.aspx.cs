@@ -23,6 +23,21 @@ public partial class DemoPages_Security_DefaultSecurity : System.Web.UI.Page
             DataBindUserList();
             DataBindRoleList();
         }
+
+        //sample to check security authentication
+        //check the Request object that is part of every
+        // internet trip
+        //must have the this
+        if (Request.IsAuthenticated)
+        {
+            string msg = "";
+            msg += this.User.Identity.Name;
+            UserManager um = new UserManager();
+            var theUser = um.FindByName(this.User.Identity.Name);
+            msg += " has the folloing data: ID: " + theUser.WaiterID.ToString() + " Email: "
+                + theUser.Email;
+            bob.Text = msg;
+        }
     }
     private void DataBindRoleList()
     {
